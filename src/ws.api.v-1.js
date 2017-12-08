@@ -138,7 +138,7 @@
                         console.error(errmsg[result]);
                     }
                     if (ws._data.method == 'REGISTER' && ws._data.type == 'register_resp') {
-                        ws.sessionId = ws._data.info.session_id;
+                        ws._sessionId = ws._data.info.session_id;
                         if (ws.variety == '通知') ws.notify();
                         else if (ws.variety == '定向发送') ws.info();
                         else {
@@ -383,7 +383,7 @@
             var _sub = {
                 'method': 'REGISTER',
                 'type': 'subscribe_req',
-                'from': this.sessionId,
+                'from': this._sessionId,
                 'call_id': this._Guid,
                 'info': {
                     'subscribe': subtxt
@@ -400,7 +400,7 @@
         var not = {
             'method': 'NOTIFY',
             'type': t,
-            'from': this.sessionId,
+            'from': this._sessionId,
             'call_id': this._Guid,
             'info': cont
         };
@@ -415,7 +415,7 @@
         var inf = {
             'method': 'INFO',
             'type': t,
-            'from': this.sessionId,
+            'from': this._sessionId,
             'to': to,
             'call_id': this._Guid,
             'info': cont
